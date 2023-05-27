@@ -11,7 +11,7 @@
 
 ## How to run it:
 
-Create add your API Key to the _.env_ inside the _app folder_
+Add your API Key to the _.env_ inside the _app_ folder
 
 ## From the main folder run the commands:
 
@@ -40,7 +40,8 @@ I obtained the PII remover function from a chat gpt prompt.
 
 ### Future updates:
 
-Build a separate module for the PII removal that import the functions into the flask App, that way we can add more regex more easily.
+- Build a separate module for the PII removal that import the functions into the flask App, that way we can add more regex more easily.
+- Improve the page to be responsive.
 
 
 ### Feel free to make improvements and send merge request if you do.
