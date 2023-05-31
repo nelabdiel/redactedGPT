@@ -14,9 +14,9 @@
         <center>
             <img src="../static/RedactedGPT.png" width=60%>
         </center>
-        {% autoescape false %}
-        <p>{{inputScrubbed | safe}}</p>
-        {% endautoescape %}
+        <!--{% autoescape false %}-->
+        <p>{{inputScrubbed}}</p><!--| safe-->
+        <!--{% endautoescape %}-->
         
         <div class="container">
             <p class="typed">RedactedGPT: {{chatGPTAnswer}}</p>
