@@ -1,13 +1,53 @@
 version: '3'
 
 services:
+    db:
+        container_name: hashesdb
+        image: 'postgres:latest'
+        expose:
+            - "5432:5432"
+        environment:
+            POSTGRES_USER: username
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: hashesdb
+            POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+            POSTGRES_INITDB_ARGS: '--auth-host=scram-sha-256 --auth-local=scram-sha-256'
+        networks:
+             - scannernet
 
-    api:
+    scanner:
+        container_name: scanner
+        restart: always
+        build: ./scanner
+        ports:
+            - "8002:8002"
+        depends_on:
+            - db
+        environment:
+            DB_HOST: db
+            DB_USER: username
+            DB_PASSWORD: password
+            DB_NAME: hashesdb
+        networks:
+             - scannernet
+        command: gunicorn -w 1 -b :8002 scanner:scanner
+
+    webapp:
         container_name: app #Name can be anything
         restart: always
         build: ./app
         ports:
             - "8000:8000"
+        depends_on:
+            - db
+            - scanner
+        environment:
+            DB_HOST: db
+            DB_USER: username
+            DB_PASSWORD: password
+            DB_NAME: hashesdb
+        networks:
+             - scannernet
         command: gunicorn -w 1 -b :8000 chatgphitAPP:APP
         
     nginx:
@@ -17,4 +57,13 @@ services:
         ports:
             - "8001:8001"
         depends_on:
-            - api
+            - webapp
+
+
+
+networks:
+    scannernet:
+        driver: bridge
+            
+volumes:
+  pgdata:
