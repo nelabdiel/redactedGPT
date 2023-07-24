@@ -6,7 +6,7 @@
 
 ## Watch demo here: https://youtu.be/ldUYTdizbVg
 
-## Update you can now flag confidential information as well. See Hashing Section.
+## Update: You can now flag confidential information as well. See Hashing Section.
 
 <hr>
 
