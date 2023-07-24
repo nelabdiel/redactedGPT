@@ -118,7 +118,7 @@ def index():
                         
             # if the text is similar to something we know to be confidential then dont send it to chatgpt for an answer.
             if k <= 100:
-                chatgpt = 'I apoligize, but this seems to be fairly similar to information I know to be Confidential'
+                chatgpt = 'I apoligize, but this seems to be fairly similar to information I know to be confidential'
             
             else:
                 # Get Answer
