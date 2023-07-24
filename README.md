@@ -56,7 +56,7 @@ Open a browser on _0.0.0.0:8000_ and enjoy!
 ## Hashing 
 ### Storing a (only the) hash of your confidential or protected documents 
 
-We now have the capability to save a[Locality Sensitive Hash](https://github.com/trendmicro/tlsh) for the confidential information you don't want your org to paste into ChatGPT. When someone makes an inquiry to RedactedGPT, the first thing it'll do is check if the hash of the inquiry is relatively similar to the hash of any of the documents you don't want leaked and if it is, it won't send the inquiry to ChatGPT and it will inform the user.
+We now have the capability to save a [Locality Sensitive Hash](https://github.com/trendmicro/tlsh) for the confidential information you don't want your org to paste into ChatGPT. When someone makes an inquiry to RedactedGPT, the first thing it'll do is check if the hash of the inquiry is relatively similar to the hash of any of the documents you don't want leaked and if it is, it won't send the inquiry to ChatGPT and it will inform the user.
 
 To save the hash of a document follow the following command from your terminal
 
