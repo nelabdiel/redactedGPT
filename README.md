@@ -19,7 +19,7 @@ _Note: When you add a document (instructions below), only the the hash is saved,
 
 If it is similar enough it will not send the inquiry to ChatGPT and it will alert the user that it can't proceed because it seems to be similar to information we deem confidential.
 
-If the app determines that the inquiry is not that similar to the hashes of your confidential documents, it then applies a PII removal as an security control. 
+If the app determines that the inquiry is not that similar to the hashes of your confidential documents, it then applies a PII removal as an additional security control. 
 
 Only then it sends the information to ChatGPT via API and returns an answer to the user.
 
