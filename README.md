@@ -13,7 +13,7 @@
 
 
 # How it works:
-
+![Alt text](./app/static/OnePagerRGPT.png "RedactedGPT Workflow Banner")
 When you write an inquiry to RedactedGPT the first thing it does is apply a the [Trend Micro Locality Sensitive Hash](https://github.com/trendmicro/tlsh) and compares that hash with the TLS Hashes you have added to your database for possible leakage. 
 _Note: When you add a document (instructions below), only the the hash is saved, not the document. The document is immediately deleted so even though the app lives entirely within your network, not even the app knows what's on the document. This is really important for security purposes._
 
