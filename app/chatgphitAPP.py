@@ -66,7 +66,19 @@ def remove_pii(text):
 #processed_text = remove_pii(input_text)
 #print(processed_text)
 
+# List of sensitive keywords that you want to detect
+sensitive_keywords = ["confidential", "secret", "private", "classified", "fouo"]
 
+def detect_sensitive_keywords(text):
+    """
+    Detects sensitive keywords in the given text.
+    Returns a list of detected keywords.
+    """
+    detected_keywords = []
+    for keyword in sensitive_keywords:
+        if re.search(r'\b{}\b'.format(re.escape(keyword)), text, re.IGNORECASE):
+            detected_keywords.append(keyword)
+    return detected_keywords
 
 
 
@@ -94,38 +106,44 @@ def index():
             
             text = request.form['input_text']
             
-            #text in bytes
-            btext = bytes(text, 'utf-8')
-            tlshash = tlsh.hash(btext)
             
-            # suppose that documents are k = 800 apart.
-            k = 800
-            if len(doc_hashes) > 0:
-                for l in doc_hashes:
-                    d = tlsh.diff(l[0], tlshash)
-                    if d < k:
-                        k = d
-            #remove PII
-            text = remove_pii(text)
-
-            # suppose that documents are k = 800 apart.
-            k = 800
-            if len(doc_hashes) > 0:
-                for l in doc_hashes:
-                    d = tlsh.diff(l[0], tlshash)
-                    if d < k:
-                        k = d
-                        
-            # if the text is similar to something we know to be confidential then dont send it to chatgpt for an answer.
-            if k <= 100:
+            if len(detect_sensitive_keywords(text)) > 0:
                 chatgpt = 'I apoligize, but this seems to be fairly similar to information I know to be confidential'
             
-            else:
-                # Get Answer
-                chatgpt= 'goof' #askgpt(text)[0]
             
-            #"Answer will appear here"
-            text = '~You~: ' + text
+            else:
+                #text in bytes
+                btext = bytes(text, 'utf-8')
+                tlshash = tlsh.hash(btext)
+
+                # suppose that documents are k = 800 apart.
+                k = 800
+                if len(doc_hashes) > 0:
+                    for l in doc_hashes:
+                        d = tlsh.diff(l[0], tlshash)
+                        if d < k:
+                            k = d
+                #remove PII
+                text = remove_pii(text)
+
+                # suppose that documents are k = 800 apart.
+                k = 800
+                if len(doc_hashes) > 0:
+                    for l in doc_hashes:
+                        d = tlsh.diff(l[0], tlshash)
+                        if d < k:
+                            k = d
+
+                # if the text is similar to something we know to be confidential then dont send it to chatgpt for an answer.
+                if k <= 100:
+                    chatgpt = 'I apoligize, but this seems to be fairly similar to information I know to be confidential'
+
+                else:
+                    # Get Answer
+                    chatgpt= 'goof' #askgpt(text)[0]
+
+                #"Answer will appear here"
+                text = '~You~: ' + text
             
             
             
