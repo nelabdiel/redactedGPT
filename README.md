@@ -68,7 +68,7 @@ _curl -F "file=@your_file.docx" http://localhost:8002/upload_
 ### References:
 
 
-I'm using the API call from this tutorial: #https://www.twilio.com/blog/integrate-chatgpt-api-python
+I'm using the API call from this tutorial: https://www.twilio.com/blog/integrate-chatgpt-api-python
 
 I obtained the PII remover function from a ChatGPT prompt!
 
